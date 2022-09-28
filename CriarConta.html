@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/criarContaStyle.css ">
     <title>MyHealth</title>
+    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <nav>
-            <div>
-                <img src="assets/imgs/icon-vaccine.svg" alt="logo">
-                <h2>MyHealth - Criar Conta</h2>
+        <nav class="menu">
+            <div class="menu-esquerda">
+                <div class="logo">
+                    <img src="assets/imgs/icon-vaccine.png" alt="logo">
+                </div>
+                <h2 class="app-name">MyHealth</h2>
             </div>
-        </nav>
     </header>
-    <section>
+    <section class="container">
         <div>
-            <form>
-                <div>
+            <form class="cadastro-forms">
+                <div class="cadastro-forms">
                     <label for="nome">Nome Completo</label>
                     <label for="Sex">Sexo</label>
                     <label for="data_nascimento">Data de Nascimento</label>
@@ -28,7 +31,7 @@
                     <label for="senha">Senha</label>
                     <label for="senha2">Repetir Senha</label>
                 </div>
-                <div>
+                <div class="cadastro-forms">
                     <input type="text" placeholder="Jurandir Pereira">
                     <input type="radio" name="radio_masculino" id="masc">
                     <label for="radio_masculino">Masculino</label>

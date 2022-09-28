@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Averia Libre', cursive;
+}
+
+.menu {
+    display: flex;
+    height: 87px;
+    background-color: #8FE1D9;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu-esquerda {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 51px;
+    width: 51px;
+    margin-left: 18px;
+    margin-top: 5px;
+    margin-right: 16px;
+}
+
+.app-name {
+    font-size: 48px;
+    font-weight: 400;
+    color: #419ED7;
+}
+
+.container {
+    background-color: #ADD4D0;
+    height: 89vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cadastro-forms {
+    display: flex;
+    flex-direction: column;
+}

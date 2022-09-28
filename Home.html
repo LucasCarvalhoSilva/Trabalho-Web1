@@ -5,33 +5,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/homeStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     <title>MyHealth</title>
+    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <nav>
-            <div>
-                <img src="assets/imgs/icon-vaccine.svg" alt="logo">
-                <h2>MyHealth</h2>
+        <nav class="menu">
+            <div class="menu-esquerda">
+                <div class="logo">
+                    <img src="assets/imgs/icon-vaccine.png" alt="logo">
+                </div>
+                <h2 class="app-name">MyHealth</h2>
             </div>
-            <div>
+            <div class="menu-direita">
                 <ul>
-                    <li>
-                        <a href="#">Minhas vacinas</a>
+                    <li class="menu-item">
+                        <a class="item" href="#">Minhas vacinas</a>
                     </li>
-                    <li>
-                        <a href="Index.html">Logout</a>
+                    <li class="menu-item">
+                        <a class="item" href="Index.html">Logout</a>
                     </li>
                 </ul>
             </div>
-        </nav>
     </header>
-    <section>
-        <div>
-            <input type="text">
+    <section class="container">
+        <div class="container-pesquisa">
+            <input class="pesquisa" type="search" placeholder="PESQUISAR VACINA...">
         </div>
-        <div>
+        <div class="container-vacinas">
             <div>
                 <h3>Vacina 1</h3>
                 <h4>Dose 1</h4>
@@ -41,7 +46,7 @@
             </div>
         </div>
         <div>
-            <button>Nova Vacina</button>
+            <button class="btn-nova-vacina">Nova Vacina</button>
         </div>
     </section>
 </body>

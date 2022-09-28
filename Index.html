@@ -5,29 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/indexStyle.css">
     <title>MyHealth</title>
+    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <nav>
-            <div>
-                <img src="assets/imgs/icon-vaccine.svg" alt="logo">
-                <h2>MyHealth</h2>
+        <nav class="menu">
+            <div class="menu-esquerda">
+                <div class="logo">
+                    <img src="assets/imgs/icon-vaccine.png" alt="logo">
+                </div>
+                <h2 class="app-name">MyHealth</h2>
             </div>
-            <div>
+            <div class="menu-direita">
                 <ul>
-                    <li>
-                        <a href="Entrar.html">Já tenho conta</a>
+                    <li class="menu-item">
+                        <a class="item" href="Entrar.html">Já tenho conta</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <section>
-        <div>
-            <h1>Controle as suas vacinas e fique seguro</h1>
-            <button>Criar minha conta</button>
+    <section class="main-container">
+        <div class="container">
+            <h1 class="titulo-principal">Controle as suas vacinas e fique seguro</h1>
+            <button class="btn-cadastro">Criar minha conta</button>
         </div>
     </section>
 </body>
