@@ -31,70 +31,79 @@
     color: #419ED7;
 }
 
-.menu-direita {
-    display: flex;
-    align-items: center;
-    padding-right: 17px;
-}
-
-.menu-direita ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-.menu-item {
-    background-color: #419ED7;
-    width: 198px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.25);
-    margin-left: 26px;
-}
-
-.item {
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-    text-decoration: none;
-    color: #FFFFFF;
-}
-
 .container {
     width: 100%;
     height: calc(100vh - 87px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    background-color: #ADD5D0;
 }
 
-.container-pesquisa {
-    margin-top: 26px;
-}
-
-.pesquisa {
-    width: 1370px;
-    height: 40px;
-    font-size: 24px;
-}
-
-.container-vacinas {
-    height: 688px;
+.container-forms {
     display: flex;
 }
 
-.btn-nova-vacina {
+.forms {
+    display: flex;
+}
+
+.rotulos-forms {
+    display: flex;
+    flex-direction: column;
+}
+
+.rotulo {
+    font-size: 36px;
+    color: #FFFFFF;
+    height: 43px;
+    margin-right: 14px;
+    margin-top: 31px;
+}
+
+.entradas-forms {
+    display: flex;
+    flex-direction: column;
+}
+
+.entrada {
+    width: 586px;
+    height: 51px;
+    border: none;
+    margin-top: 29px;
+    font-size: 36px;
+    color: #3F92C5;
+    padding-left: 15px;
+}
+
+.entrada::placeholder {
+    color: #3F92C5;
+    font-size: 36px;
+    padding-left: 15px;
+}
+
+.btn-entrar {
     height: 50px;
     width: 188px;
-    margin-bottom: 20px;
-    border: none;
+    margin-top: 47px;
+    border: 1px solid #37BD6D;
     background-color: #49B976;
     color: #FFFFFF;
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
     box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.recuperar-senha {
+    display: block;
+    margin-top: 145px;
+    font-size: 24px;
+    color: #419ED7;
+}
+
+.falha-no-login {
+    font-size: 29px;
+    color: #FD7979;
 }

@@ -4,44 +4,154 @@
     font-family: 'Averia Libre', cursive;
 }
 
-.menu {
-    display: flex;
-    height: 87px;
-    background-color: #8FE1D9;
-    flex-direction: row;
-    justify-content: space-between;
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.menu-esquerda {
+.menu {
+    height: 87px;
+    margin: 0;
+    padding: 0;
     display: flex;
+    background-color: #C1E7E3;
+}
+
+.esquerda {
+    display: flex;
+    height: 87px;
     align-items: center;
 }
 
-.logo {
-    height: 51px;
-    width: 51px;
-    margin-left: 18px;
-    margin-top: 5px;
-    margin-right: 16px;
+.esquerda a {
+    display: flex;
+    text-decoration: none;
 }
 
-.app-name {
+.logo {
+    margin-top: 20px;
+    margin-left: 18px;
+    height: 51px;
+    width: 51px;
+}
+
+.logo-title {
     font-size: 48px;
-    font-weight: 400;
     color: #419ED7;
 }
 
 .container {
-    background-color: #ADD4D0;
-    height: 89vh;
-    width: 100%;
+    height: calc(100vh - 87px);
+    background-color: #ADD5D0;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.forms-container {
+    height: 100%;
+    width: 865px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.forms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rotulos-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    width: 270px;
+}
+
+.inputs-containers {
+    display: flex;
     flex-direction: column;
 }
 
-.cadastro-forms {
+.rotulo {
+    font-size: 36px;
+    height: 43px;
+    margin-right: 15px;
+    margin-top: 34px;
+    color: #FFFFFF;
+    width: 280px;
+}
+
+.entrada {
+    font-size: 36px;
+    height: 46px;
+    width: 585px;
+    border: none;
+    color: #3F92C5;
+    margin-top: 34px;
+}
+
+.entrada::placeholder {
+    color: #3F92C5;
+    padding-left: 14px;
+    font-size: 36px;
+    text-justify: center;
+}
+
+.radio {
+    height: 46px;
+    margin-top: 34px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.rotulo-radio {
+    color: #FFFFFF;
+    margin-left: 9px;
+    margin-right: 1px;
+    font-size: 30px;
+}
+
+.entrada-radio {
+    color: #3F92C5;
+    height: 35px;
+    width: 35px;
+    margin-left: 8px;
+}
+
+.entrada-data {
+    font-size: 36px;
+    height: 46px;
+    width: 300px;
+    border: none;
+    color: #3F92C5;
+    margin-top: 34px;
+}
+
+.entrada-data::placeholder {
+    margin-left: 9px;
+}
+
+.senha-invalida {
+    color: #FD7979;
+    font-size: 24px;
+}
+
+.btn-cadastrar {
+    width: 188px;
+    height: 50px;
+    background-color: #49B976;
+    margin-top: 66px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: 1px solid #37BD6D;
+    box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.25);
 }

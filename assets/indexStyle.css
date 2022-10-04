@@ -60,7 +60,7 @@
 }
 
 .main-container {
-    height: 89vh;
+    height: calc(100vh - 87px);
     width: 100%;
     background-size: 100% 100%;
     background-image: linear-gradient(180deg, rgba(105, 105, 105, 0.95) 15%, rgba(0, 0, 0, 0.35) 40%, rgba(105, 105, 105, 0.95)), url('imgs/backgroun-index.jpeg');

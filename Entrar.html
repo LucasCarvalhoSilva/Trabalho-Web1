@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/entrarStyle.css">
-    <title>MyHealth</title>
-    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
+    <title>MyHealth - Entrar</title>
+    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
@@ -16,36 +15,35 @@
 
 <body>
     <header>
-        <nav>
-            <div>
-                <div>
-                    <img src="assets/imgs/icon-vaccine.svg" alt="logo">
+        <nav class="menu">
+            <div class="menu-esquerda">
+                <div class="logo">
+                    <img src="assets/imgs/icon-vaccine.png" alt="logo">
                 </div>
-                <h2>MyHealth - Entrar</h2>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        <a href="">Já tenho conta</a>
-                    </li>
-                </ul>
+                <h2 class="app-name">MyHealth</h2>
             </div>
         </nav>
     </header>
-    <section>
+    <section class="container">
         <div>
-            <form>
-                <div>
-                    <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" placeholder="*********">
+            <form class="forms">
+                <div class="container-forms">
+                    <div class="rotulos-forms">
+                        <label class="rotulo" for="email">E-mail</label>
+                        <label class="rotulo" for="senha">Senha</label>
+                    </div>
+                    <div class="entradas-forms">
+                        <input class="entrada" type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
+                        <input class="entrada" type="password" name="senha" id="senha" placeholder="*********">
+                    </div>
                 </div>
-                <span>E-mail ou senha inválido</span>
-                <button>Entrar</button>
             </form>
         </div>
+        <span class="falha-no-login">E-mail ou senha inválido</span>
+        <button class="btn-entrar">Entrar</button>
+        <a class="recuperar-senha" href="RecuperarSenha.html">Esqueci minha senha</a>
     </section>
+
 </body>
 
 </html>

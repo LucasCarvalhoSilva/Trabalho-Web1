@@ -5,46 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/criarContaStyle.css ">
-    <title>MyHealth</title>
-    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
+    <link rel="stylesheet" href="assets/criarContaStyle.css">
+    <title>MyHealth - Criar Conta</title>
+    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.png" type="image/x-icon">
 </head>
 
 <body>
-    <header>
-        <nav class="menu">
-            <div class="menu-esquerda">
+    <header class="menu">
+        <div class="esquerda">
+            <a href="Index.html">
                 <div class="logo">
-                    <img src="assets/imgs/icon-vaccine.png" alt="logo">
+                    <img src="assets/imgs/icon-vaccine.png" alt="Logo My MyHealth">
                 </div>
-                <h2 class="app-name">MyHealth</h2>
-            </div>
+                <h3 class="logo-title">My Health</h3>
+            </a>
+        </div>
     </header>
     <section class="container">
-        <div>
-            <form class="cadastro-forms">
-                <div class="cadastro-forms">
-                    <label for="nome">Nome Completo</label>
-                    <label for="Sex">Sexo</label>
-                    <label for="data_nascimento">Data de Nascimento</label>
-                    <label for="email">E-mail</label>
-                    <label for="senha">Senha</label>
-                    <label for="senha2">Repetir Senha</label>
+        <div class="forms-container">
+            <form class="forms">
+                <div class="rotulos-container">
+                    <label class="rotulo" for="name">Nome completo</label>
+                    <label class="rotulo" for="sexo">Sexo</label>
+                    <label class="rotulo" for="data-nascimento">Data nascimento</label>
+                    <label class="rotulo" for="email">E-mail</label>
+                    <label class="rotulo" for="senha">Senha</label>
+                    <label class="rotulo" for="repetirSenha">Repetir senha</label>
                 </div>
-                <div class="cadastro-forms">
-                    <input type="text" placeholder="Jurandir Pereira">
-                    <input type="radio" name="radio_masculino" id="masc">
-                    <label for="radio_masculino">Masculino</label>
-                    <input type="radio" name="radio_feminino" id="femin">
-                    <label for="radio_feminino">Feminino</label>
-                    <input type="date" name="data_nascimento" id="date" placeholder="11/08/2022">
-                    <input type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
-                    <input type="password" name="senha" id="senha" placeholder="********">
-                    <input type="password" name="senha2" id="senha2" placeholder="*****">
-                    <span>Senha não Confere</span>
+                <div class="inputs-container">
+                    <input class="entrada" type="text" name="name" id="name" placeholder="Jurandir Pereira">
+                    <div class="radio">
+                        <input class="entrada-radio" type="radio" id="masc">
+                        <label class="rotulo-radio" for="masc">Masculino</label>
+                        <input class="entrada-radio" type="radio" id="femin">
+                        <label class="rotulo-radio" for="femin">Feminino</label>
+                    </div>
+                    <input class="entrada-data" type="date" name="data-nascimento" id="data-nascimento">
+                    <input class="entrada" type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
+                    <input class="entrada" type="password" name="senha" id="senha" placeholder="******">
+                    <input class="entrada" type="password" name="repetirSenha" id="repetirSenha" placeholder="******">
+                    <span class="senha-invalida" id="senha-invalida"></span>
                 </div>
-                <button>Cadastrar</button>
             </form>
+            <button class="btn-cadastrar">Cadastrar</button>
         </div>
     </section>
 </body>
