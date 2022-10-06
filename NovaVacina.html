@@ -5,63 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/novaVacinaStyle.css">
     <title>MyHealth - Nova Vacina</title>
-    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/imgs/icon-vaccine.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <nav>
-            <div>
-                <div>
-                    <img src="assets/imgs/icon-vaccine.svg" alt="logo">
+        <nav class="menu">
+            <div class="menu-esquerda">
+                <div class="logo">
+                    <img src="assets/imgs/icon-vaccine.png" alt="logo">
                 </div>
-                <h2>MyHealth</h2>
+                <h2 class="app-name">MyHealth</h2>
             </div>
-            <div>
+            <div class="menu-direita">
                 <ul>
-                    <li>
-                        <a href="Home.html">Minhas vacinas</a>
+                    <li class="menu-item">
+                        <a class="item" href="Home.html">Minhas vacinas</a>
                     </li>
-                    <li>
-                        <a href="Index.html">Logout</a>
+                    <li class="menu-item">
+                        <a class="item" href="Index.html">Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <section>
+    <section class="container">
         <div>
             <form>
-                <div>
-                    <div>
-                        <label for="data_vacina">Data de Vacinação</label>
-                        <label for="nome">Vacina</label>
-                        <label for="dose">Dose</label>
-                        <label for="comprovante">Comprovante de Vacina</label>
-                        <label for="proxima_vacina">Próxima Vacinação</label>
+                <div class="container-forms">
+                    <div class="forms-rotulos">
+                        <label class="rotulo" for="data_vacina">Data de Vacinação</label>
+                        <label class="rotulo" for="nome">Vacina</label>
+                        <label class="rotulo" for="dose">Dose</label>
+                        <label class="rotulo" for="comprovante">Comprovante de Vacina</label>
+                        <label class="rotulo" for="proxima_vacina">Próxima Vacinação</label>
                     </div>
-                    <div>
-                        <input type="date" name="data_vacina" id="data_vacina" placeholder="11/08/2022">
-                        <input type="text" name="nome" id="nome" placeholder="Hepatite B">
-                        <input type="radio" name="1dose" id="1dose">
-                        <label for="1dose">1a. dose</label>
-                        <input type="radio" name="2dose" id="2dose">
-                        <label for="1dose">2a. dose</label>
-                        <input type="radio" name="3dose" id="3dose">
-                        <label for="1dose">3a. dose</label>
-                        <input type="radio" name="reforco" id="reforco">
-                        <label for="1dose">Reforço</label>
-                        <input type="radio" name="unica" id="unica">
-                        <label for="1dose">Dose Única</label>
-                        <input type="file" name="image" id="image" placeholder="Selecione a Imagem" accept="image/png, image/jpeg">
+                    <div class="forms-entradas">
+                        <input class="entrada" type="date" name="data_vacina" id="data_vacina" placeholder="11/08/2022">
+                        <input class="entrada" type="text" name="nome" id="nome" placeholder="Hepatite B">
+                        <div class="container-radio">
+                            <input class="entrada-radio" type="radio" name="1dose" id="1dose">
+                            <label class="rotulo-radio" for="1dose">1a. dose</label>
+                            <input class="entrada-radio" type="radio" name="2dose" id="2dose">
+                            <label class="rotulo-radio" for="1dose">2a. dose</label>
+                            <input class="entrada-radio" type="radio" name="3dose" id="3dose">
+                            <label class="rotulo-radio" for="1dose">3a. dose</label>
+                            <input class="entrada-radio" type="radio" name="reforco" id="reforco">
+                            <label class="rotulo-radio" for="1dose">Reforço</label>
+                            <input class="entrada-radio" type="radio" name="unica" id="unica">
+                            <label class="rotulo-radio" for="1dose">Dose Única</label>
+                        </div>
+                        <input class="entrada" type="file" name="image" id="image" placeholder="Selecione a Imagem" accept="image/png, image/jpeg">
                         <img src="" alt="">
-                        <input type="date" name="" id="" placeholder="11/08/2022">
+                        <input class="entrada" type="date" name="" id="" placeholder="11/08/2022">
                     </div>
-                    <button>Cadastrar</button>
                 </div>
             </form>
         </div>
+        <button class="btn-cadastrar">Cadastrar</button>
     </section>
 </body>
 
