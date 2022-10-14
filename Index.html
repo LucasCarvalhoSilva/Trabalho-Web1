@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -34,9 +36,15 @@
     <section class="main-container">
         <div class="container">
             <h1 class="titulo-principal">Controle as suas vacinas e fique seguro</h1>
-            <button class="btn-cadastro">Criar minha conta</button>
+            <button class="btn-cadastro" onclick="cadastrarUsuario()">Criar minha conta</button>
         </div>
     </section>
+
+    <script>
+        function cadastrarUsuario() {
+            window.location.href = "./CriarConta.html";
+        }
+    </script>
 </body>
 
 </html>

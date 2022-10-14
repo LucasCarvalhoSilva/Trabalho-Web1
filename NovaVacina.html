@@ -40,6 +40,7 @@
                         <label class="rotulo" for="nome">Vacina</label>
                         <label class="rotulo" for="dose">Dose</label>
                         <label class="rotulo" for="comprovante">Comprovante de Vacina</label>
+                        <div class="espaco-img"></div>
                         <label class="rotulo" for="proxima_vacina">Próxima Vacinação</label>
                     </div>
                     <div class="forms-entradas">
@@ -57,15 +58,35 @@
                             <input class="entrada-radio" type="radio" name="unica" id="unica">
                             <label class="rotulo-radio" for="1dose">Dose Única</label>
                         </div>
-                        <input class="entrada" type="file" name="image" id="image" placeholder="Selecione a Imagem" accept="image/png, image/jpeg">
-                        <img src="" alt="">
+                        <label class="add-img" for="add-image">Selecionar imagem...</label>
+                        <input class="entrada" type="file" name="image" id="add-image" onload="readImage()">
+                        <div class="img-nova-vacina">
+                            <img id="imgComprovante" src="" alt="" height="146px">
+                        </div>
                         <input class="entrada" type="date" name="" id="" placeholder="11/08/2022">
                     </div>
                 </div>
             </form>
         </div>
-        <button class="btn-cadastrar">Cadastrar</button>
+        <button class="btn-cadastrar" onclick="adicionarVacina()">Cadastrar</button>
     </section>
+
+    <script>
+        function adicionarVacina() {
+            window.location.href = "./Home.html"
+        }
+
+        function readImage() {
+            if (this.files && this.files[0]) {
+                var file = new FileReader();
+                file.onload = function(e) {
+                    document.getElementById("imgComprovante").src = e.target.result;
+                };
+                file.readAsDataURL(this.files[0]);
+            }
+        }
+        document.getElementById("add-image").addEventListener("change", readImage, false);
+    </script>
 </body>
 
 </html>

@@ -36,6 +36,7 @@
             <input class="pesquisa" type="search" placeholder="PESQUISAR VACINA...">
         </div>
         <div class="container-vacinas">
+            <!--
             <div>
                 <h3>Vacina 1</h3>
                 <h4>Dose 1</h4>
@@ -43,11 +44,18 @@
                 <img src="" alt="">
                 <span>proxima vacina</span>
             </div>
+        -->
         </div>
         <div>
-            <button class="btn-nova-vacina">Nova Vacina</button>
+            <button class="btn-nova-vacina" onclick="adicionarVacina()">Nova Vacina</button>
         </div>
     </section>
+
+    <script>
+        function adicionarVacina() {
+            window.location.href = "./NovaVacina.html"
+        }
+    </script>
 </body>
 
 </html>

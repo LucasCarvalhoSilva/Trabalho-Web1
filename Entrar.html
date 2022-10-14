@@ -39,11 +39,16 @@
                 </div>
             </form>
         </div>
-        <span class="falha-no-login">E-mail ou senha inválido</span>
-        <button class="btn-entrar">Entrar</button>
+        <span class="falha-no-login"></span>
+        <button class="btn-entrar" onclick="logar()">Entrar</button>
         <a class="recuperar-senha" href="RecuperarSenha.html">Esqueci minha senha</a>
     </section>
 
+    <script>
+        function logar() {
+            window.location.href = "./Home.html"
+        }
+    </script>
 </body>
 
 </html>

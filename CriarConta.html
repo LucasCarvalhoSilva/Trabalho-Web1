@@ -44,12 +44,25 @@
                     <input class="entrada" type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
                     <input class="entrada" type="password" name="senha" id="senha" placeholder="******">
                     <input class="entrada" type="password" name="repetirSenha" id="repetirSenha" placeholder="******">
-                    <span class="senha-invalida" id="senha-invalida"></span>
+                    <span class="senha-invalida" id="senhaInvalida"></span>
                 </div>
             </form>
-            <button class="btn-cadastrar">Cadastrar</button>
+            <button class="btn-cadastrar" onclick="criarConta()">Cadastrar</button>
         </div>
     </section>
+
+    <script>
+        function criarConta() {
+            const senha = document.getElementById("senha").value;
+            const repetirSenha = document.getElementById("repetirSenha").value
+
+            if (senha === repetirSenha) {
+                window.location.href = "./Home.html"
+            } else {
+                document.getElementById("senhaInvalida").innerHTML = "As senhas não conferem"
+            }
+        }
+    </script>
 </body>
 
 </html>
