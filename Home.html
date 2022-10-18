@@ -33,18 +33,14 @@
     </header>
     <section class="container">
         <div class="container-pesquisa">
-            <input class="pesquisa" type="search" placeholder="PESQUISAR VACINA...">
+            <img src="assets/imgs/search.svg" alt="">
+            <p>PESQUISAR VACINA...</p>
         </div>
         <div class="container-vacinas">
-            <!--
-            <div>
-                <h3>Vacina 1</h3>
-                <h4>Dose 1</h4>
-                <span>data</span>
-                <img src="" alt="">
-                <span>proxima vacina</span>
-            </div>
-        -->
+
+            <ul class="vacinas" id="vacinasContainer">
+            </ul>
+
         </div>
         <div>
             <button class="btn-nova-vacina" onclick="adicionarVacina()">Nova Vacina</button>
@@ -52,6 +48,94 @@
     </section>
 
     <script>
+        let vacinas = [{
+                id: 1,
+                nome: "BCG",
+                dose: "única",
+                dataVacina: "11/06/2022",
+                comprovante: "assets/imgs/comprovante.png",
+                proximaVacina: "Não há proxima vacina"
+            },
+
+            {
+                id: 2,
+                nome: "Hepatite B",
+                dose: "1ª dose",
+                dataVacina: "11/08/2022",
+                comprovante: "assets/imgs/comprovante.png",
+                proximaVacina: "Próxima dose em: 11/10/2022"
+            }, {
+                id: 3,
+                nome: "Rotavírus",
+                dose: "1ª dose",
+                dataVacina: "11/10/2022",
+                comprovante: "assets/imgs/comprovante.png",
+                proximaVacina: "Próxima dose em: 11/10/2023"
+            }, {
+                id: 4,
+                nome: "Febre amarela",
+                dose: "1ª dose",
+                dataVacina: "11/10/2022",
+                comprovante: "assets/imgs/comprovante.png",
+                proximaVacina: "Próxima dose em: 11/10/2023"
+            }
+        ]
+
+        const card = (id, nome, dose, data, comprovante, proximaDose) => {
+            const itemVacina = document.createElement("li")
+
+            const nomeVacina = document.createElement("h3")
+            nomeVacina.innerHTML = nome
+
+            const doseVacina = document.createElement("h4")
+            doseVacina.innerHTML = dose
+
+            const dataVacina = document.createElement("p")
+            dataVacina.innerHTML = data
+
+            const comprovanteVacina = document.createElement("img")
+            comprovanteVacina.src = comprovante
+
+            const proximaDoseVacina = document.createElement("span")
+            proximaDoseVacina.innerHTML = proximaDose
+
+            itemVacina.appendChild(nomeVacina)
+            itemVacina.appendChild(doseVacina)
+            itemVacina.appendChild(dataVacina)
+            itemVacina.appendChild(comprovanteVacina)
+            itemVacina.appendChild(proximaDoseVacina)
+
+            itemVacina.addEventListener("click", () => {
+                window.location.href = "EditarVacina.html?idVacina=" + id
+            })
+
+            return itemVacina
+        }
+
+        window.onload = () => {
+                vacinas.forEach(vacina => {
+                    document.getElementById("vacinasContainer").appendChild(card(vacina.id, vacina.nome, vacina.dose, vacina.dataVacina, vacina.comprovante, vacina.proximaVacina))
+                })
+
+                sessionStorage.setItem("listaVacinas", JSON.stringify(vacinas))
+            }
+            /*
+            function listarVacinas() {
+                const vacinasContainer = document.getElementById("vacinasContainer")
+                vacinas.forEach(vacina => {
+                    vacinasContainer.innerHTML += "<li onclick='editarVacina()'><h3>" +
+                        vacina.nome + "</h3><h4>" +
+                        vacina.dose + "</h4><p>" +
+                        vacina.dataVacina + "</p><img src='" +
+                        vacina.comprovante + "'><span>" +
+                        vacina.proximaVacina +
+                        "</span></li>"
+                });
+            }
+            */
+
+        listarVacinas()
+
         function adicionarVacina() {
             window.location.href = "./NovaVacina.html"
         }

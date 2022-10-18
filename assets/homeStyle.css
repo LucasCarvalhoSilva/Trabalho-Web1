@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Averia Libre', cursive;
+    box-sizing: border-box;
 }
 
 .menu {
@@ -29,6 +30,7 @@
     font-size: 48px;
     font-weight: 400;
     color: #419ED7;
+    cursor: pointer;
 }
 
 .menu-direita {
@@ -70,4 +72,90 @@
     align-items: center;
     justify-content: center;
     background-color: #ADD5D0;
+}
+
+.container-vacinas {
+    display: flex;
+    width: 1123px;
+}
+
+.vacinas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 66px;
+    margin-top: 25px;
+    margin-bottom: -20px;
+}
+
+.vacinas li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 321px;
+    width: 330px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.vacinas li h3 {
+    font-size: 36px;
+    color: #3F92C5;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.vacinas li h4 {
+    height: 20px;
+    width: 94px;
+    background-color: #3F92C5;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 11px;
+}
+
+.vacinas li p {
+    color: #8B8B8B;
+    font-size: 16px;
+    margin-top: 6px;
+}
+
+.vacinas li img {
+    height: 146px;
+    width: 299px;
+    margin-top: 11px;
+}
+
+.vacinas li span {
+    margin-top: 27px;
+    align-self: end;
+    color: #FD7979;
+    margin-right: 11px;
+}
+
+.container-pesquisa {
+    margin-top: 26px;
+    display: flex;
+    height: 40px;
+    width: 1370px;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding-left: 10px;
+}
+
+.container-pesquisa p {
+    margin-left: 20px;
+    color: #8B8B8B;
+}
+
+.btn-nova-vacina {
+    background-color: #49B976;
+    border: 1px solid #37BD6D;
+    height: 50px;
+    width: 188px;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    margin-top: 50px;
 }
