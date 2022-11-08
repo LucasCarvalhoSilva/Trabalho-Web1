@@ -39,15 +39,47 @@
                 </div>
             </form>
         </div>
-        <span class="falha-no-login"></span>
-        <button class="btn-entrar" onclick="logar()">Entrar</button>
+        <span class="falha-no-login" id="message"></span>
+        <button class="btn-entrar" id="btnLogar">Entrar</button>
         <a class="recuperar-senha" href="RecuperarSenha.html">Esqueci minha senha</a>
     </section>
 
-    <script>
-        function logar() {
-            window.location.href = "./Home.html"
+    <script type="module">
+
+        import {app, auth} from './config/firebase.js'
+        import {signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js"
+
+        const getEmail = () => {
+            return document.getElementById("email").value
         }
+
+        const getSenha = () => {
+            return document.getElementById("senha").value
+        }
+        const autenticarUsuario = () => {
+            const email = getEmail()
+            const senha = getSenha()
+
+            signInWithEmailAndPassword(auth, email, senha)
+            .then( (user) => {
+                window.location.href = "./home.html"
+            })
+            .catch( (error) => {
+                console.log(error.code)
+                if (error.code === "auth/wrong-password")
+                    document.getElementById("message").innerHTML = "Senha incorreta"
+                else if(error.code === "auth/user-not-found")
+                    document.getElementById("message").innerHTML = "Usuário inválido"
+            })
+            .finally( () => {
+            })
+
+
+        }
+        window.onload = () => {
+            document.getElementById("btnLogar").addEventListener('click', autenticarUsuario)
+           }
+        
     </script>
 </body>
 

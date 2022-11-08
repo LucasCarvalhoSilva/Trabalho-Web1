@@ -33,8 +33,7 @@
     </header>
     <section class="container">
         <div class="container-pesquisa">
-            <img src="assets/imgs/search.svg" alt="">
-            <p>PESQUISAR VACINA...</p>
+            <input type="text" placeholder="PESQUISAR VACINA...">
         </div>
         <div class="container-vacinas">
 
@@ -119,20 +118,7 @@
 
                 sessionStorage.setItem("listaVacinas", JSON.stringify(vacinas))
             }
-            /*
-            function listarVacinas() {
-                const vacinasContainer = document.getElementById("vacinasContainer")
-                vacinas.forEach(vacina => {
-                    vacinasContainer.innerHTML += "<li onclick='editarVacina()'><h3>" +
-                        vacina.nome + "</h3><h4>" +
-                        vacina.dose + "</h4><p>" +
-                        vacina.dataVacina + "</p><img src='" +
-                        vacina.comprovante + "'><span>" +
-                        vacina.proximaVacina +
-                        "</span></li>"
-                });
-            }
-            */
+            
 
         listarVacinas()
 
@@ -142,4 +128,4 @@
     </script>
 </body>
 
-</html>
+</html> 

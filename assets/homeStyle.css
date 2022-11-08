@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Averia Libre', cursive;
-    box-sizing: border-box;
 }
 
 .menu {
@@ -30,7 +29,6 @@
     font-size: 48px;
     font-weight: 400;
     color: #419ED7;
-    cursor: pointer;
 }
 
 .menu-direita {
@@ -74,88 +72,94 @@
     background-color: #ADD5D0;
 }
 
-.container-vacinas {
-    display: flex;
-    width: 1123px;
+.container-pesquisa {
+    margin-top: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
+    height: 40px;
+    width: auto;
+    position: absolute;
+    top: 113px;
+    left: 0px;
+}
+
+.container-pesquisa input {
+    width: 1815px;
+    height: 40px;
 }
 
 .vacinas {
     display: flex;
+    margin-top:15px;
+    margin-left: 160px;
+    margin-right: 160px;
     flex-wrap: wrap;
-    gap: 66px;
-    margin-top: 25px;
-    margin-bottom: -20px;
 }
 
 .vacinas li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     height: 321px;
     width: 330px;
     background-color: #FFFFFF;
+    list-style: none;
+    display: flex;
     border-radius: 10px;
-    cursor: pointer;
+    flex-direction: column;
+    margin-right: 65px;
+    margin-top: 45px;
 }
 
 .vacinas li h3 {
+    font-weight: 400;
     font-size: 36px;
+    line-height: 43px;
     color: #3F92C5;
+    align-self: center;
     margin-top: 15px;
-    cursor: pointer;
 }
 
 .vacinas li h4 {
-    height: 20px;
-    width: 94px;
-    background-color: #3F92C5;
-    color: #FFFFFF;
-    text-align: center;
+    font-weight: 400;
     font-size: 16px;
+    line-height: 19px;
+    background-color: #3F92C5;
+    height: 20px;
+    width: 100px;
+    align-self: center;
+    text-align: center;
+    color: #FFFFFF;
     margin-top: 11px;
 }
 
 .vacinas li p {
-    color: #8B8B8B;
+    font-weight: 400;
     font-size: 16px;
+    line-height: 19px;
+    align-self: center;
+    color: #8B8B8B;
     margin-top: 6px;
 }
 
 .vacinas li img {
-    height: 146px;
     width: 299px;
+    height: 146px;
+    align-self: center;
     margin-top: 11px;
 }
 
 .vacinas li span {
     margin-top: 27px;
-    align-self: end;
-    color: #FD7979;
+    align-self: flex-end;
     margin-right: 11px;
-}
-
-.container-pesquisa {
-    margin-top: 26px;
-    display: flex;
-    height: 40px;
-    width: 1370px;
-    align-items: center;
-    background-color: #FFFFFF;
-    padding-left: 10px;
-}
-
-.container-pesquisa p {
-    margin-left: 20px;
-    color: #8B8B8B;
+    color: #FD7979;
 }
 
 .btn-nova-vacina {
+    width: 188px;
+    height: 50px;
+    margin-top: 55px;
+    color: #FFFFFF;
     background-color: #49B976;
     border: 1px solid #37BD6D;
-    height: 50px;
-    width: 188px;
+    box-shadow: 0 4px 2px 2px rgba(0, 0, 0, 0.25);
     font-size: 24px;
-    color: #FFFFFF;
-    margin-bottom: 20px;
-    margin-top: 50px;
 }

@@ -29,9 +29,15 @@
                     <input class="entrada" type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
                 </div>
             </form>
-            <button class="btn-redefinir">Redefinir Senha</button>
+            <button class="btn-redefinir" onclick="recuperarSenha()">Redefinir Senha</button>
         </div>
     </section>
+
+    <script>
+        function recuperarSenha() {
+            window.location.href = "./Index.html";
+        }
+    </script>
 </body>
 
 </html>

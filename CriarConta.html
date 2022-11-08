@@ -41,27 +41,59 @@
                         <label class="rotulo-radio" for="femin">Feminino</label>
                     </div>
                     <input class="entrada-data" type="date" name="data-nascimento" id="data-nascimento">
-                    <input class="entrada" type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
+                    <input class="entrada" type="email" name="email" id="txtEmail" placeholder="jurandir.pereira@hotmail.com">
                     <input class="entrada" type="password" name="senha" id="senha" placeholder="******">
                     <input class="entrada" type="password" name="repetirSenha" id="repetirSenha" placeholder="******">
                     <span class="senha-invalida" id="senhaInvalida"></span>
                 </div>
             </form>
-            <button class="btn-cadastrar" onclick="criarConta()">Cadastrar</button>
+        <button class="btn-cadastrar" id="btnCadastrar">Cadastrar</button>
         </div>
     </section>
 
-    <script>
-        function criarConta() {
-            const senha = document.getElementById("senha").value;
-            const repetirSenha = document.getElementById("repetirSenha").value
+    <script type="module">
+        import { app, auth } from "./config/firebase.js"
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js"
 
-            if (senha === repetirSenha) {
-                window.location.href = "./Home.html"
+        const getEmail = () => {
+            return document.getElementById("txtEmail").value
+        }
+
+        const getSenha = () => {
+            return document.getElementById("senha").value
+        }
+
+        const getRepetirSenha = () => {
+            return document.getElementById("repetirSenha").value
+        }
+        
+        const spanErro = document.getElementById("senha-invalida")
+
+        function cadastrar() {
+            if (getSenha() === getRepetirSenha()) {
+                cadastrarUsuario()
             } else {
-                document.getElementById("senhaInvalida").innerHTML = "As senhas não conferem"
+                spanErro.innerHTML = "Senhas não conferem"
             }
         }
+
+        const cadastrarUsuario = () => {
+            const email = getEmail()
+            const senha = getSenha()
+
+            createUserWithEmailAndPassword(auth, email, senha)
+            .then( (user) => {
+                window.location.href = "./Entrar.html";
+            })
+            .catch( (error) => {
+                console.log(error.message)
+            })
+        }
+
+        window.onload = () => {
+            document.getElementById("btnCadastrar").addEventListener('click',cadastrar)
+        }
+
     </script>
 </body>
 
