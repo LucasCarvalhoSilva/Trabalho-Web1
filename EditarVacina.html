@@ -79,12 +79,12 @@
                                 <div class="img-nova-vacina">
                                     <img id="imgComprovante" src="" alt="" height="146px">
                                 </div>
-                                <input class="entrada" type="date" name="" id="" placeholder="11/08/2022">
+                                <input class="entrada" type="date" name="dataReforco" id="dataReforco" placeholder="11/08/2022">
                             </div>
                         </div>
                     </form>
                 </div>
-                <button class="btn-alterar" onclick="editarVacina()">Salvar alterações</button>
+                <button class="btn-alterar" id="btnSalvarAlteracoes">Salvar alterações</button>
             </section>
 
         </main>
@@ -102,7 +102,10 @@
         </div>
     </section>
 
-    <script>
+    <script type="module">
+        import {db} from './config/firebase.js';
+        import { addDoc, collection, getDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+
         function excluirVacinaModal(alertID) {
             const modal = document.getElementById(alertID)
             modal.classList.add('visible')
@@ -117,10 +120,6 @@
             modal.classList.remove('visible')
         }
 
-        function editarVacina() {
-            window.location.href = "./Home.html"
-        }
-
         function readImage() {
             if (this.files && this.files[0]) {
                 var file = new FileReader();
@@ -130,10 +129,70 @@
                 file.readAsDataURL(this.files[0]);
             }
         }
+
         document.getElementById("add-image").addEventListener("change", readImage, false);
 
+        const getNomeVacina = () => {
+            return document.getElementById("nome").value;
+        }
+
+        const getDataVacina = () => {
+            return document.getElementById("data_vacina").value;
+        }
+
+        const getComprovante = () => {
+            return document.getElementById("add-image").value;
+        }
+
+        const getDataReforco = () => {
+            return document.getElementById("dataReforco").value;
+        }
+
+        const setNomeVacina = (nomeVacina) => {
+            document.getElementById("nome").value = nomeVacina;
+        }
+
+        const setDataVacina = (dataVacina) => {
+            document.getElementById("data_vacina").value = dataVacina;
+        }
+
+        const setComprovante = (comprovanteUrl) => {
+            document.getElementById("add-image").value = comprovanteUrl;
+        }
+
+        const setDataReforco = (proximaDoseDaVacina) => {
+            document.getElementById("dataReforco").value = proximaDoseDaVacina;
+        }
+
+        const editarVacina = (id) => {
+            updateDoc(doc(db, "vacinas", id), {
+                dataVacina: getDataVacina(),
+                doseVacina: "Primeira Dose",
+                imageUrl: getComprovante(),
+                nomeVacina: getNomeVacina(),
+                proximaDoseDaVacina: getDataReforco()
+            })
+            .then(() => {
+                window.location.href = "./Home.html"
+            })
+            .catch((error) => {
+                console.log("erro ao atualizar o documento: " + error);
+            })
+        }
+
         window.onload = () => {
-            const id = new URLSearchParams(window.location.search).get('id')
+            const id = new URLSearchParams(window.location.search).get('id');
+            document.getElementById("btnSalvarAlteracoes").addEventListener('click',() => {editarVacina(id)})
+            getDoc(doc(db, "vacinas", id))
+                .then((documento) => {
+                    setNomeVacina(documento.data().nomeVacina);
+                    setDataVacina(documento.data().dataVacina);
+                    setComprovante(documento.data().imageUrl);
+                    setDataReforco(documento.data().proximaDoseDaVacina);
+                })
+                .catch((error) => {
+                    console.log("Erro ao recuperar o documento: " + error)
+                })
         }
     </script>
 </body>
