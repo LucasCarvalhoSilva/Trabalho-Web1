@@ -94,17 +94,18 @@
         function adicionarVacina() {
             addDoc(collection( db, "vacinas" ), {
                 dataVacina: getDataVacina(),
+                doseVacina: "Primeira Dose",
                 nomeVacina: getNomeVacina(),
                 imageUrl: getImageUrl(),
                 proximaDoseDaVacina: getProximaDoseDaVacina()
             })
             .then((result) => {
-                console.log(JSON.stringify(result))
+                console.log(JSON.stringify(result));
+                window.location.href = "./Home.html";
             })
             .catch((error) => {
-                console.log("erro ao persistir dados: " + error)
+                console.log("erro ao persistir dados: " + error);
             })
-            //window.location.href = "./Home.html"
         }
 
         function readImage() {

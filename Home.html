@@ -42,43 +42,23 @@
 
         </div>
         <div>
-            <button class="btn-nova-vacina" onclick="adicionarVacina()">Nova Vacina</button>
+            <button class="btn-nova-vacina" id="btnNovaVacina">Nova Vacina</button>
         </div>
     </section>
 
-    <script>
-        let vacinas = [{
-                id: 1,
-                nome: "BCG",
-                dose: "única",
-                dataVacina: "11/06/2022",
-                comprovante: "assets/imgs/comprovante.png",
-                proximaVacina: "Não há proxima vacina"
-            },
+    <script type="module">
+        import {db} from './config/firebase.js';
+        import { query, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
-            {
-                id: 2,
-                nome: "Hepatite B",
-                dose: "1ª dose",
-                dataVacina: "11/08/2022",
-                comprovante: "assets/imgs/comprovante.png",
-                proximaVacina: "Próxima dose em: 11/10/2022"
-            }, {
-                id: 3,
-                nome: "Rotavírus",
-                dose: "1ª dose",
-                dataVacina: "11/10/2022",
-                comprovante: "assets/imgs/comprovante.png",
-                proximaVacina: "Próxima dose em: 11/10/2023"
-            }, {
-                id: 4,
-                nome: "Febre amarela",
-                dose: "1ª dose",
-                dataVacina: "11/10/2022",
-                comprovante: "assets/imgs/comprovante.png",
-                proximaVacina: "Próxima dose em: 11/10/2023"
-            }
-        ]
+        const q = query(collection( db, "vacinas" ))
+
+        const carregaVacinas = () => {
+            onSnapshot( q, (results) => {
+                results.forEach((documento) => {
+                    card(documento.id, documento.data().nomeVacina, documento.data().doseVacina, documento.data().dataVacina,  documento.data().imageUrl,  documento.data().proximaDoseDaVacina)
+                })
+            })
+        }
 
         const card = (id, nome, dose, data, comprovante, proximaDose) => {
             const itemVacina = document.createElement("li")
@@ -108,19 +88,13 @@
                 window.location.href = "EditarVacina.html?idVacina=" + id
             })
 
-            return itemVacina
+            document.getElementById("vacinasContainer").appendChild(itemVacina)
         }
 
         window.onload = () => {
-                vacinas.forEach(vacina => {
-                    document.getElementById("vacinasContainer").appendChild(card(vacina.id, vacina.nome, vacina.dose, vacina.dataVacina, vacina.comprovante, vacina.proximaVacina))
-                })
-
-                sessionStorage.setItem("listaVacinas", JSON.stringify(vacinas))
-            }
-            
-
-        listarVacinas()
+            carregaVacinas();
+            document.getElementById("btnNovaVacina").addEventListener("click",adicionarVacina);
+        }
 
         function adicionarVacina() {
             window.location.href = "./NovaVacina.html"

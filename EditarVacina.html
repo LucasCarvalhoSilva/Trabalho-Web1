@@ -131,6 +131,10 @@
             }
         }
         document.getElementById("add-image").addEventListener("change", readImage, false);
+
+        window.onload = () => {
+            const id = new URLSearchParams(window.location.search).get('id')
+        }
     </script>
 </body>
 
