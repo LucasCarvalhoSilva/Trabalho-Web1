@@ -41,10 +41,10 @@
                         <label class="rotulo" for="dose">Dose</label>
                         <label class="rotulo" for="comprovante">Comprovante de Vacina</label>
                         <div class="espaco-img"></div>
-                        <label class="rotulo" for="proxima_vacina">Próxima Vacinação</label>
+                        <label class="rotulo" for="proximaVacina">Próxima Vacinação</label>
                     </div>
                     <div class="forms-entradas">
-                        <input class="entrada" type="date" name="data_vacina" id="data_vacina" placeholder="11/08/2022">
+                        <input class="entrada" type="date" name="data_vacina" id="dataVacina" placeholder="11/08/2022">
                         <input class="entrada" type="text" name="nome" id="nome" placeholder="Hepatite B">
                         <div class="container-radio">
                             <input class="entrada-radio" type="radio" name="1dose" id="1dose">
@@ -58,22 +58,53 @@
                             <input class="entrada-radio" type="radio" name="unica" id="unica">
                             <label class="rotulo-radio" for="1dose">Dose Única</label>
                         </div>
-                        <label class="add-img" for="add-image">Selecionar imagem...</label>
-                        <input class="entrada" type="file" name="image" id="add-image" onload="readImage()">
+                        <label class="add-img" for="addImage">Selecionar imagem...</label>
+                        <input class="entrada" type="file" name="image" id="addImage" onload="readImage()">
                         <div class="img-nova-vacina">
                             <img id="imgComprovante" src="" alt="" height="146px">
                         </div>
-                        <input class="entrada" type="date" name="" id="" placeholder="11/08/2022">
+                        <input class="entrada" type="date" name="" id="proximaVacina" placeholder="11/08/2022">
                     </div>
                 </div>
             </form>
         </div>
-        <button class="btn-cadastrar" onclick="adicionarVacina()">Cadastrar</button>
+        <button class="btn-cadastrar" id="btnCadastrar" >Cadastrar</button>
     </section>
 
-    <script>
+    <script type="module">
+        import {db} from "./config/firebase.js";
+        import { addDoc, collection } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+
+        function getDataVacina () {
+            return document.getElementById("dataVacina").value;
+        }
+
+        function getNomeVacina () {
+            return document.getElementById("nome").value;
+        }
+
+        function getImageUrl () {
+            return document.getElementById("addImage").value;
+        }
+
+        function getProximaDoseDaVacina () {
+            return document.getElementById("proximaVacina").value;
+        }
+
         function adicionarVacina() {
-            window.location.href = "./Home.html"
+            addDoc(collection( db, "vacinas" ), {
+                dataVacina: getDataVacina(),
+                nomeVacina: getNomeVacina(),
+                imageUrl: getImageUrl(),
+                proximaDoseDaVacina: getProximaDoseDaVacina()
+            })
+            .then((result) => {
+                console.log(JSON.stringify(result))
+            })
+            .catch((error) => {
+                console.log("erro ao persistir dados: " + error)
+            })
+            //window.location.href = "./Home.html"
         }
 
         function readImage() {
@@ -85,7 +116,9 @@
                 file.readAsDataURL(this.files[0]);
             }
         }
-        document.getElementById("add-image").addEventListener("change", readImage, false);
+
+        document.getElementById("btnCadastrar").addEventListener("click",adicionarVacina);
+        document.getElementById("addImage").addEventListener("change", readImage, false);
     </script>
 </body>
 
