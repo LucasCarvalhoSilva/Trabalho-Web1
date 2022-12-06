@@ -63,15 +63,15 @@
                                 <input class="entrada" type="date" name="data_vacina" id="data_vacina" placeholder="11/08/2022">
                                 <input class="entrada" type="text" name="nome" id="nome" placeholder="Hepatite B">
                                 <div class="container-radio">
-                                    <input class="entrada-radio" type="radio" name="1dose" id="1dose">
+                                    <input class="entrada-radio" type="radio" name="dose" id="1dose" value="1ª dose">
                                     <label class="rotulo-radio" for="1dose">1a. dose</label>
-                                    <input class="entrada-radio" type="radio" name="2dose" id="2dose">
+                                    <input class="entrada-radio" type="radio" name="dose" id="2dose" value="2ª dose">
                                     <label class="rotulo-radio" for="1dose">2a. dose</label>
-                                    <input class="entrada-radio" type="radio" name="3dose" id="3dose">
+                                    <input class="entrada-radio" type="radio" name="dose" id="3dose" value="3ª dose">
                                     <label class="rotulo-radio" for="1dose">3a. dose</label>
-                                    <input class="entrada-radio" type="radio" name="reforco" id="reforco">
+                                    <input class="entrada-radio" type="radio" name="dose" id="reforco" value="Reforço">
                                     <label class="rotulo-radio" for="1dose">Reforço</label>
-                                    <input class="entrada-radio" type="radio" name="unica" id="unica">
+                                    <input class="entrada-radio" type="radio" name="dose" id="unica" value="Dose Única">
                                     <label class="rotulo-radio" for="1dose">Dose Única</label>
                                 </div>
                                 <label class="add-img" for="add-image">Selecionar imagem...</label>
@@ -103,7 +103,7 @@
     </section>
 
     <script type="module">
-        import {db, storage} from './config/firebase.js';
+        import {db, storage, auth} from './config/firebase.js';
         import { addDoc, collection, getDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
         import { uploadBytes, ref, getDownloadURL, deleteObject} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 
@@ -160,6 +160,15 @@
             return document.getElementById("add-image").value;
         }
 
+        const getDose = () => {
+           let opcoes = document.getElementsByName("dose");
+           for (let i = 0; i < opcoes.length; i++) {
+                if(opcoes[i].checked) {
+                    return opcoes[i].value
+                }
+           } 
+        }
+
         const getDataReforco = () => {
             return document.getElementById("dataReforco").value;
         }
@@ -170,6 +179,16 @@
 
         const setNomeVacina = (nomeVacina) => {
             document.getElementById("nome").value = nomeVacina;
+        }
+
+        const setDose = (dose) => {
+           let opcoes = document.getElementsByName("dose");
+           for (let i = 0; i < opcoes.length; i++) {
+                console.log(dose, opcoes[i])
+                if(opcoes[i].value == dose) {
+                    opcoes[i].checked = true
+                }
+           } 
         }
 
         const setDataVacina = (dataVacina) => {
@@ -247,11 +266,20 @@
                     setDataVacina(documento.data().dataVacina);
                     setDataReforco(documento.data().proximaDoseDaVacina);
                     setPathFoto(documento.data().pathFoto);
+                    setDose(documento.data().doseVacina);
                 })
                 .catch((error) => {
                     console.log("Erro ao recuperar o documento: " + error)
                 })
             console.log(getComprovante())
+            console.log(auth)
+            const user = auth.currentUser.email
+            console.log(user)
+            if(user) {
+                console.log("Welcome!");
+            } else {
+                //window.location.href = "./"
+            }
         }
     </script>
 </body>

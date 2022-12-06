@@ -29,13 +29,29 @@
                     <input class="entrada" type="email" name="email" id="email" placeholder="jurandir.pereira@hotmail.com">
                 </div>
             </form>
-            <button class="btn-redefinir" onclick="recuperarSenha()">Redefinir Senha</button>
+            <button class="btn-redefinir" id="recuperarSenha" >Redefinir Senha</button>
         </div>
     </section>
 
-    <script>
-        function recuperarSenha() {
-            window.location.href = "./Index.html";
+    <script type="module">
+        import {auth} from './config/firebase.js';
+        import{sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+        window.onload = () => {
+            document.getElementById("recuperarSenha").addEventListener('click', recuperarSenha)
+        }
+
+        const recuperarSenha = () => {
+            const email = auth.currentUser.email
+            console.log(email)
+            sendPasswordResetEmail(auth, email)
+            .then(() => {
+                window.location.href = "./Index.html";
+            })
+            .catch((error) => {
+                console.log("Falha ao enviar email: " + error)
+            })
+            
         }
     </script>
 </body>

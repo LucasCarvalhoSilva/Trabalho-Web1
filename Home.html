@@ -47,7 +47,7 @@
     </section>
 
     <script type="module">
-        import {db} from './config/firebase.js';
+        import {db, auth} from './config/firebase.js';
         import { query, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
         const q = query(collection( db, "vacinas" ))
@@ -94,6 +94,15 @@
         window.onload = () => {
             carregaVacinas();
             document.getElementById("btnNovaVacina").addEventListener("click",adicionarVacina);
+          
+            console.log(auth)
+            const user = auth.currentUser 
+            console.log(user)
+            if(user) {
+                console.log("Welcome!");
+            } else {
+                //window.location.href = "./"
+            }
         }
 
         function adicionarVacina() {

@@ -47,15 +47,15 @@
                         <input class="entrada" type="date" name="data_vacina" id="dataVacina" placeholder="11/08/2022">
                         <input class="entrada" type="text" name="nome" id="nome" placeholder="Hepatite B">
                         <div class="container-radio">
-                            <input class="entrada-radio" type="radio" name="1dose" id="1dose">
+                            <input class="entrada-radio" type="radio" name="dose" id="1dose" value="1ª dose">
                             <label class="rotulo-radio" for="1dose">1a. dose</label>
-                            <input class="entrada-radio" type="radio" name="2dose" id="2dose">
+                            <input class="entrada-radio" type="radio" name="dose" id="2dose" value="2ª dose">
                             <label class="rotulo-radio" for="1dose">2a. dose</label>
-                            <input class="entrada-radio" type="radio" name="3dose" id="3dose">
+                            <input class="entrada-radio" type="radio" name="dose" id="3dose" value="3ª dose">
                             <label class="rotulo-radio" for="1dose">3a. dose</label>
-                            <input class="entrada-radio" type="radio" name="reforco" id="reforco">
+                            <input class="entrada-radio" type="radio" name="dose" id="reforco" value="Reforço">
                             <label class="rotulo-radio" for="1dose">Reforço</label>
-                            <input class="entrada-radio" type="radio" name="unica" id="unica">
+                            <input class="entrada-radio" type="radio" name="dose" id="unica" value="Dose Única">
                             <label class="rotulo-radio" for="1dose">Dose Única</label>
                         </div>
                         <label class="add-img" for="addImage">Selecionar imagem...</label>
@@ -72,7 +72,7 @@
     </section>
 
     <script type="module">
-        import {db, storage} from "./config/firebase.js";
+        import {db, storage, auth} from "./config/firebase.js";
         import { addDoc, collection } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
         import { uploadBytes, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
 
@@ -89,6 +89,15 @@
 
         function getImageUrl () {
             return document.getElementById("addImage").value;
+        }
+
+        function getDose () {
+           let opcoes = document.getElementsByName("dose");
+           for (let i = 0; i < opcoes.length; i++) {
+                if(opcoes[i].checked) {
+                    return opcoes[i].value
+                }
+           } 
         }
 
         function getProximaDoseDaVacina () {
@@ -111,7 +120,7 @@
                     console.log(URL);
                     addDoc(collection( db, "vacinas" ), {
                         dataVacina: getDataVacina(),
-                        doseVacina: "Primeira Dose",
+                        doseVacina: getDose(),
                         nomeVacina: getNomeVacina(),
                         imageUrl: url,
                         pathFoto: fileRef,
@@ -152,6 +161,15 @@
                 arquivo = event.target.files[0];
                 console.log(arquivo);
             })
+            console.log(auth)
+            const user = auth.currentUser 
+            console.log(user)
+            if(user) {
+                console.log("Welcome!");
+            } else {
+                //window.location.href = "./"
+            }
+
         }
         document.getElementById("btnCadastrar").addEventListener("click",adicionarVacina);
         document.getElementById("addImage").addEventListener("change", readImage, false);
