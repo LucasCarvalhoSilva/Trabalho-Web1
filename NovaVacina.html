@@ -170,12 +170,9 @@
             })
             onAuthStateChanged(auth,(user) => {
                 console.log("aqui: " , auth)
-            //    const user = auth 
-                
-                userEmail = user.email
-                console.log(userEmail)
                 if(user) {
                     console.log("Welcome!");
+                    userEmail = user.email
                 } else {
                     console.log("n conectado")
                     window.location.href = "./"

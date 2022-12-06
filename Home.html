@@ -142,13 +142,12 @@
 
             onAuthStateChanged(auth,(user) => {
                 console.log("aqui: " , auth)
-                userEmail = user.email
-                console.log(userEmail)
                 if(user) {
                     console.log("Welcome!");
+                    userEmail = user.email
                 } else {
                     console.log("n conectado")
-                    window.location.href = "./"
+                    window.location.href = "./Index.html"
                 }
             }) 
         }

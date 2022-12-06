@@ -262,6 +262,19 @@
                 arquivo = event.target.files[0];
                 console.log(arquivo);
             })
+
+            onAuthStateChanged(auth,(user) => {
+                console.log("aqui: " , auth)
+            //    const user = auth 
+                console.log(user)
+                if(user) {
+                    console.log("Welcome!");
+                } else {
+                    console.log("n conectado")
+                    window.location.href = "./"
+                }
+            })
+            
             getDoc(doc(db, "vacinas", id))
                 .then((documento) => {
                     setNomeVacina(documento.data().nomeVacina);
@@ -273,17 +286,7 @@
                 .catch((error) => {
                     console.log("Erro ao recuperar o documento: " + error)
                 })
-                onAuthStateChanged(auth,(user) => {
-                console.log("aqui: " , auth)
-            //    const user = auth 
-                console.log(user)
-                if(user) {
-                    console.log("Welcome!");
-                } else {
-                    console.log("n conectado")
-                    window.location.href = "./"
-                }
-            })
+            
         }
     </script>
 </body>
