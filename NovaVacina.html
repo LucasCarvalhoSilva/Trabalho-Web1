@@ -72,8 +72,12 @@
     </section>
 
     <script type="module">
-        import {db} from "./config/firebase.js";
+        import {db, storage} from "./config/firebase.js";
         import { addDoc, collection } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+        import { uploadBytes, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
+
+
+        var arquivo = null;
 
         function getDataVacina () {
             return document.getElementById("dataVacina").value;
@@ -91,21 +95,46 @@
             return document.getElementById("proximaVacina").value;
         }
 
+        const uid = () => {
+            const id = Date.now().toString(16) + Math.random().toString(16);
+            return id.replace(/\./g, '')
+        }
+
         function adicionarVacina() {
-            addDoc(collection( db, "vacinas" ), {
-                dataVacina: getDataVacina(),
-                doseVacina: "Primeira Dose",
-                nomeVacina: getNomeVacina(),
-                imageUrl: getImageUrl(),
-                proximaDoseDaVacina: getProximaDoseDaVacina()
-            })
+
+            const fileRef = "images/" + uid()
+            uploadBytes(ref(storage, fileRef), arquivo)
             .then((result) => {
-                console.log(JSON.stringify(result));
-                window.location.href = "./Home.html";
+                console.log("arquivo enviado com sucesso: " + result);
+                getDownloadURL(ref(storage, fileRef))
+                .then((url) => {
+                    console.log(URL);
+                    addDoc(collection( db, "vacinas" ), {
+                        dataVacina: getDataVacina(),
+                        doseVacina: "Primeira Dose",
+                        nomeVacina: getNomeVacina(),
+                        imageUrl: url,
+                        pathFoto: fileRef,
+                        proximaDoseDaVacina: getProximaDoseDaVacina()
+                    })
+                    .then((result) => {
+                        console.log(JSON.stringify(result));
+                        window.location.href = "./Home.html";
+                    })
+                    .catch((error) => {
+                        console.log("erro ao persistir dados: " + error);
+                    })
+                })
+                .catch((error) => {
+                    console.log("Erro ao recuperar url da image: " + error);
+                })
             })
             .catch((error) => {
-                console.log("erro ao persistir dados: " + error);
+                console.log("erro ao enviar arquivo: " + error);
             })
+
+
+            
         }
 
         function readImage() {
@@ -118,6 +147,12 @@
             }
         }
 
+        window.onload = () => {
+            document.getElementById("addImage").addEventListener('change', (event) => {
+                arquivo = event.target.files[0];
+                console.log(arquivo);
+            })
+        }
         document.getElementById("btnCadastrar").addEventListener("click",adicionarVacina);
         document.getElementById("addImage").addEventListener("change", readImage, false);
     </script>

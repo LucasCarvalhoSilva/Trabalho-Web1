@@ -103,8 +103,12 @@
     </section>
 
     <script type="module">
-        import {db} from './config/firebase.js';
+        import {db, storage} from './config/firebase.js';
         import { addDoc, collection, getDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+        import { uploadBytes, ref, getDownloadURL, deleteObject} from "https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js";
+
+        var arquivo = null;
+        var pathFoto = null;
 
         function excluirVacinaModal(alertID) {
             const modal = document.getElementById(alertID)
@@ -112,14 +116,19 @@
         }
 
         function excluirVacina(id) {
-            deleteDoc(doc(db, "vacinas", id))
+            deleteObject(ref(storage, getPathFoto()))
             .then(() => {
-                window.location.href = "./Home.html"
+                deleteDoc(doc(db, "vacinas", id))
+                .then(() => {
+                    window.location.href = "./Home.html"
+                })
+                .catch((error) => {
+                    console.log("Erro ao excluir documento: " + error);
+                })
             })
             .catch((error) => {
-                console.log("Erro ao excluir documento: " + error);
+                console.log("Erro ao excluir arquivo: " + error)
             })
-            
         }
 
         function fecharModal(alertID) {
@@ -155,6 +164,10 @@
             return document.getElementById("dataReforco").value;
         }
 
+        const getPathFoto = () => {
+            return pathFoto;
+        }
+
         const setNomeVacina = (nomeVacina) => {
             document.getElementById("nome").value = nomeVacina;
         }
@@ -163,28 +176,59 @@
             document.getElementById("data_vacina").value = dataVacina;
         }
 
-        const setComprovante = (comprovanteUrl) => {
-            document.getElementById("add-image").value = comprovanteUrl;
-        }
 
         const setDataReforco = (proximaDoseDaVacina) => {
             document.getElementById("dataReforco").value = proximaDoseDaVacina;
         }
 
+        const setPathFoto = (path) => {
+            pathFoto = path;
+            console.log(pathFoto)
+        }
+
+        const uid = () => {
+            const id = Date.now().toString(16) + Math.random().toString(16);
+            return id.replace(/\./g, '')
+        }
+
         const editarVacina = (id) => {
-            updateDoc(doc(db, "vacinas", id), {
-                dataVacina: getDataVacina(),
-                doseVacina: "Primeira Dose",
-                imageUrl: getComprovante(),
-                nomeVacina: getNomeVacina(),
-                proximaDoseDaVacina: getDataReforco()
-            })
-            .then(() => {
-                window.location.href = "./Home.html"
-            })
-            .catch((error) => {
-                console.log("erro ao atualizar o documento: " + error);
-            })
+
+            if (arquivo) {
+                console.log(getPathFoto())
+                uploadBytes(ref(storage, getPathFoto()), arquivo)
+                .then((result) => {
+                    console.log("arquivo enviado com sucesso: " + result);
+                    updateDoc(doc(db, "vacinas", id), {
+                        dataVacina: getDataVacina(),
+                        doseVacina: "Primeira Dose",
+                        nomeVacina: getNomeVacina(),
+                        proximaDoseDaVacina: getDataReforco()
+                    })
+                    .then(() => {
+                        window.location.href = "./Home.html"
+                    })
+                    .catch((error) => {
+                        console.log("erro ao atualizar o documento: " + error);
+                    })
+                })
+                .catch((error) => {
+                    console.log("erro ao enviar arquivo: " + error);
+                })
+            }else {
+                updateDoc(doc(db, "vacinas", id), {
+                    dataVacina: getDataVacina(),
+                    doseVacina: "Primeira Dose",
+                    nomeVacina: getNomeVacina(),
+                    proximaDoseDaVacina: getDataReforco()
+                })
+                .then(() => {
+                    window.location.href = "./Home.html"
+                })
+                .catch((error) => {
+                    console.log("erro ao atualizar o documento: " + error);
+                })
+            }
+            
         }
 
         window.onload = () => {
@@ -193,16 +237,21 @@
             document.getElementById("btnExcluir").addEventListener('click',() => {excluirVacinaModal('alert-modal')})
             document.getElementById("btnConfirmarExcluir").addEventListener('click',() => {excluirVacina(id)})
             document.getElementById("btnCancelarExcluir").addEventListener('click',() => {fecharModal('alert-modal')})
+            document.getElementById("add-image").addEventListener('change', (event) => {
+                arquivo = event.target.files[0];
+                console.log(arquivo);
+            })
             getDoc(doc(db, "vacinas", id))
                 .then((documento) => {
                     setNomeVacina(documento.data().nomeVacina);
                     setDataVacina(documento.data().dataVacina);
-                    setComprovante(documento.data().imageUrl);
                     setDataReforco(documento.data().proximaDoseDaVacina);
+                    setPathFoto(documento.data().pathFoto);
                 })
                 .catch((error) => {
                     console.log("Erro ao recuperar o documento: " + error)
                 })
+            console.log(getComprovante())
         }
     </script>
 </body>
