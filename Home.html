@@ -25,8 +25,8 @@
                     <li class="menu-item">
                         <a class="item" href="#">Minhas vacinas</a>
                     </li>
-                    <li class="menu-item">
-                        <a class="item" href="Index.html">Logout</a>
+                    <li class="menu-item" id="deslogar">
+                        <a class="item">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -47,11 +47,11 @@
     </section>
 
     <script type="module">
-        import {db, auth} from './config/firebase.js';
+        import {db, app} from './config/firebase.js';
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
         import { query, collection, onSnapshot, } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
-        
-
+        const auth = getAuth(app)
         const listaVacinas = []
 
         const carregaVacinas = () => {
@@ -118,8 +118,16 @@
             document.getElementById("vacinasContainer").appendChild(itemVacina)
         }
 
+        const deslogar = () => {
+            signOut(auth).
+            then(() => {
+                window.location.href = "./Index.html"
+            })
+        }
+        
         window.onload = () => {
             document.getElementById("btnNovaVacina").addEventListener("click",adicionarVacina);
+            document.getElementById("deslogar").addEventListener("click",deslogar);
             document.getElementById("searchBar").addEventListener('keyup', () => {
                 const searchString = document.getElementById("searchBar").value.trim()
                 mostrarVacinas(listaVacinas.filter(vacina => vacina.nomeVacina.includes(searchString)))
@@ -127,15 +135,17 @@
 
             carregaVacinas();
 
-
-            console.log(auth)
-            const user = auth.currentUser 
-            console.log(user)
-            if(user) {
-                console.log("Welcome!");
-            } else {
-                //window.location.href = "./"
-            }
+            onAuthStateChanged(auth,(user) => {
+                console.log("aqui: " , auth)
+            //    const user = auth 
+                console.log(user)
+                if(user) {
+                    console.log("Welcome!");
+                } else {
+                    console.log("n conectado")
+                    window.location.href = "./"
+                }
+            }) 
         }
 
         function adicionarVacina() {
