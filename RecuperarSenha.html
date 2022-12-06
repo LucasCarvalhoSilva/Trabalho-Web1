@@ -42,8 +42,7 @@
         }
 
         const recuperarSenha = () => {
-            const email = auth.currentUser.email
-            console.log(email)
+            const email = document.getElementById("email").value
             sendPasswordResetEmail(auth, email)
             .then(() => {
                 window.location.href = "./Index.html";

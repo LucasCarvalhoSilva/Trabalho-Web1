@@ -33,7 +33,7 @@
     </header>
     <section class="container">
         <div class="container-pesquisa">
-            <input type="text" placeholder="PESQUISAR VACINA...">
+            <input type="text" id="searchBar" placeholder="PESQUISAR VACINA...">
         </div>
         <div class="container-vacinas">
 
@@ -48,10 +48,37 @@
 
     <script type="module">
         import {db, auth} from './config/firebase.js';
-        import { query, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+        import { query, collection, onSnapshot, } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
-        const q = query(collection( db, "vacinas" ))
+        
 
+        const listaVacinas = []
+
+        const carregaVacinas = () => {
+            const q = query(collection( db, "vacinas" ))
+            onSnapshot(q, (results) => {
+                results.forEach((documento) => {
+                    listaVacinas.push({
+                        id: documento.id,
+                        nomeVacina: documento.data().nomeVacina,
+                        doseVacina: documento.data().doseVacina,
+                        dataVacina: documento.data().dataVacina,
+                        imageUrl: documento.data().imageUrl,
+                        proximaDoseDaVacina: documento.data().proximaDoseDaVacina
+                    })
+                })
+                mostrarVacinas(listaVacinas)
+            })
+        }
+
+        const mostrarVacinas = (lista) => {
+            document.getElementById("vacinasContainer").innerHTML = ""
+            lista.forEach((vacina) => {
+                console.log(vacina)
+                card(vacina.id, vacina.nomeVacina, vacina.doseVacina, vacina.dataVacina, vacina.imageUrl, vacina.proximaDoseDaVacina)
+            })
+        }
+/*
         const carregaVacinas = () => {
             onSnapshot( q, (results) => {
                 results.forEach((documento) => {
@@ -59,7 +86,7 @@
                 })
             })
         }
-
+*/
         const card = (id, nome, dose, data, comprovante, proximaDose) => {
             const itemVacina = document.createElement("li")
 
@@ -92,9 +119,15 @@
         }
 
         window.onload = () => {
-            carregaVacinas();
             document.getElementById("btnNovaVacina").addEventListener("click",adicionarVacina);
-          
+            document.getElementById("searchBar").addEventListener('keyup', () => {
+                const searchString = document.getElementById("searchBar").value.trim()
+                mostrarVacinas(listaVacinas.filter(vacina => vacina.nomeVacina.includes(searchString)))
+            })
+
+            carregaVacinas();
+
+
             console.log(auth)
             const user = auth.currentUser 
             console.log(user)
