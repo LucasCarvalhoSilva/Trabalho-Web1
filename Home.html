@@ -53,12 +53,15 @@
 
         const auth = getAuth(app)
         const listaVacinas = []
-
+        var userEmail = null
+        //mostrarVacinas(listaVacinas.filter(vacina => vacina.nomeVacina.includes(searchString)))
         const carregaVacinas = () => {
             const q = query(collection( db, "vacinas" ))
             onSnapshot(q, (results) => {
                 results.forEach((documento) => {
-                    listaVacinas.push({
+                    if(documento.data().userEmail === userEmail) {
+                        console.log("Ah mlk")
+                        listaVacinas.push({
                         id: documento.id,
                         nomeVacina: documento.data().nomeVacina,
                         doseVacina: documento.data().doseVacina,
@@ -66,6 +69,8 @@
                         imageUrl: documento.data().imageUrl,
                         proximaDoseDaVacina: documento.data().proximaDoseDaVacina
                     })
+                    }
+                    
                 })
                 mostrarVacinas(listaVacinas)
             })
@@ -137,8 +142,8 @@
 
             onAuthStateChanged(auth,(user) => {
                 console.log("aqui: " , auth)
-            //    const user = auth 
-                console.log(user)
+                userEmail = user.email
+                console.log(userEmail)
                 if(user) {
                     console.log("Welcome!");
                 } else {

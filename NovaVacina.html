@@ -79,6 +79,7 @@
 
         const auth = getAuth(app)
         var arquivo = null;
+        var userEmail = null
 
         function getDataVacina () {
             return document.getElementById("dataVacina").value;
@@ -110,6 +111,10 @@
             return id.replace(/\./g, '')
         }
 
+        const getUserEmail = () => {
+            return userEmail
+        }
+
         function adicionarVacina() {
 
             const fileRef = "images/" + uid()
@@ -125,7 +130,8 @@
                         nomeVacina: getNomeVacina(),
                         imageUrl: url,
                         pathFoto: fileRef,
-                        proximaDoseDaVacina: getProximaDoseDaVacina()
+                        proximaDoseDaVacina: getProximaDoseDaVacina(),
+                        userEmail: getUserEmail()
                     })
                     .then((result) => {
                         console.log(JSON.stringify(result));
@@ -165,7 +171,9 @@
             onAuthStateChanged(auth,(user) => {
                 console.log("aqui: " , auth)
             //    const user = auth 
-                console.log(user)
+                
+                userEmail = user.email
+                console.log(userEmail)
                 if(user) {
                     console.log("Welcome!");
                 } else {
